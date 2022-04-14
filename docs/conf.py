@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'YourProjectName'
+project = u'FacialExpressionRecognition'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -185,8 +185,8 @@ latex_elements = {
 latex_documents = [
     ('index',
      'reponame.tex',
-     u'YourProjectNamedoc Documentation',
-     u"firstname lastname", 'manual'),
+     u'FacialExpressionRecognition Documentation',
+     u"Chikako Olsen, Ivan Miller, Rabiul Hossain", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -215,8 +215,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'reponame', u'YourProjectName Documentation',
-     [u"firstname lastname"], 1)
+    ('index', 'facial-expression-recognition', u'FacialExpressionRecognition Documentation',
+     [u"Chikako Olsen, Ivan Miller, Rabiul Hossain"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -229,9 +229,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'reponame', u'YourProjectName Documentation',
-     u"firstname lastname", 'YourProjectName',
-     'fill your short discription', 'Miscellaneous'),
+    ('index', 'facial-expression-recognition', u'FacialExpressionRecognition Documentation',
+     u"Chikako Olsen, Ivan Miller, Rabiul Hossain", 'FacialExpressionRecognition',
+     'A system capable of recognizing a type of human emotion expressed in a photo of a human face.', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.

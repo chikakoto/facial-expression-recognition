@@ -1,29 +1,10 @@
-# YourProjectName
+# Feature learning in Facial Expression Recognition
 
-Short description of your project.
+In this project we would like to explore challenges of feature learning in facial expression recognition, and build a system capable of recognizing a type of human emotion expressed in a photo of a human face.
 
-Please read all the instructions in hw3p3.mdbefore submitting your project.
-Above change YourProjectName to your project name. Put a short discription of your project in the first line above.
-Make sure you edit all the files to put in the reponame, your project name where you see YourProjectName and you name instead of "firstname lastname" Please read the cookiecutter documentation. For example:
+## Data file
 
-# Filename: Makefile
-
-PROJECT_NAME = YourProjectName -> substitute your project name
-
-# config.py
-
-YourProjectName -> substitute your project name
-reponame -> substitute your repository name
-firstname lastname -> substitute your name
-
-# index.rst
-
-YourProjectName documentation!
-
-# setup.py
-
-description='A short description of the project.'
-author='firstname lastname'
+https://www.kaggle.com/datasets/msambare/fer2013
 
 ## Project Organization
 
