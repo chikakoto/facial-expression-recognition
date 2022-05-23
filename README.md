@@ -3,8 +3,11 @@
 In this project we would like to explore challenges of feature learning in facial expression recognition, and build a system capable of recognizing a type of human emotion expressed in a photo of a human face.
 
 ## Data file
+Original data is from https://www.kaggle.com/datasets/msambare/fer2013.
 
-https://www.kaggle.com/datasets/msambare/fer2013
+You can access the dataset from https://drive.google.com/file/d/1SWSs4FytkIPkj_v-EQaA_YKYqyrh5G6F/view?usp=sharing. 
+
+Also, all the feature transfered data are at https://drive.google.com/file/d/1gU6ltsuIZ1UJRlE-oniPN7FRXeGotWl8/view?usp=sharing.
 
 ## Project Organization
 
