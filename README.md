@@ -5,7 +5,7 @@ In this project we would like to explore challenges of feature learning in facia
 ## Data file
 Original data is from https://www.kaggle.com/datasets/msambare/fer2013.
 
-You can access the dataset from https://drive.google.com/file/d/1SWSs4FytkIPkj_v-EQaA_YKYqyrh5G6F/view?usp=sharing. 
+If you have CCNY Google account, you can access the dataset from https://drive.google.com/file/d/1SWSs4FytkIPkj_v-EQaA_YKYqyrh5G6F/view?usp=sharing. 
 
 Also, all the feature transfered data are at https://drive.google.com/file/d/1gU6ltsuIZ1UJRlE-oniPN7FRXeGotWl8/view?usp=sharing.
 
