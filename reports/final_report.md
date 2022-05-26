@@ -172,12 +172,7 @@ As the image goes deeper into the layers of the model, the activations start loo
 
 ![Figure 13 A](figures/figure13_a.png) ![Figure 13 B](figures/figure13_b.png)
 
-**(a)**                                     **(b)** 
-
 ![Figure 13 C](figures/figure13_c.png) ![Figure 13 D](figures/figure13_d.png)
-
-**(c)**                                     **(d)**
-
 
 **Figure 13**: Activation Maps for inner layer for a convolutional neural network:
 
@@ -204,6 +199,7 @@ We also use the Bag of Visual Word technique to compare for SVM and KNN, however
 
 **Figure 15**: Comparison of testing accuracy for SVM and KNN classifiers on data transformed using Bag of VisualWords
 
+
 #### 6.1.2 Confusion matrices
 
 All of the confusion matrices show the highest accuracy for the happy label due to the amount of the happy label data we trained. Disgust also shows high accuracy compared to any other labels and it is because we resampled the disgust label data.
@@ -224,6 +220,7 @@ Here are the overall performance scores for each Machine Learning Classifier. Ra
 
 **Figure 17**: Overall performance metrics for each model: Support Vector Machine, K-Nearest Neighbors,Random Forest, Stochastic Gradient Descent Classifier
 
+
 #### 6.1.4 Classification Reports
 
 Classification report also indicates a similar result as the confusion matrices. Highest F1-score of each classification are disgust, happy and surprise labels. Happy and disgust recall is higher than precision, however surprise precision is higher than its recall. Happy label shows high scores because it has more data than any other labels. Disgust score is not precise due to the resampling. Surprise label has the lowest number of data, therefore the precision could mark higher than recall.
@@ -243,13 +240,21 @@ Validation curve for SVM increases as parameter C becomes larger, and the model 
 
 Verification curve for SVM
 
-![](RackMultipart20220526-1-zyxhcw_html_657a5c02758962b.png) ![](RackMultipart20220526-1-zyxhcw_html_70edf238cb978d9b.png)
+![Figure 20](figures/figure20.png)
 
-![](RackMultipart20220526-1-zyxhcw_html_dfa01e36a0c1fbdc.png)
+**Figure 20**: Validation curve for the SVM classifier
 
-![](RackMultipart20220526-1-zyxhcw_html_8ce67aec416c146a.png) ![](RackMultipart20220526-1-zyxhcw_html_1f2863868bc19571.png)
+![Figure 21](figures/figure21.png)
+**Figure 21**: Accuracy of the KNN model as a function of number of neighbors K
 
-Figure X: Verification curve for each classifier with hyper parameter
+![Figure 22](figures/figure22.png)
+
+**Figure 22**: Validation curve for the Random Forest classifier
+
+![Figure 23](figures/figure23.png)
+
+**Figure 23**: Validation curve for SGD classifier
+
 
 #### 6.1.6 Learning curve
 
@@ -259,24 +264,25 @@ For the learning curve, KNN and Random forest show 100% training accuracy from t
 
 Learning curve for SVM with HoG Learning curve for KNN with HoG
 
-![](RackMultipart20220526-1-zyxhcw_html_f41e6588019ad922.png) ![](RackMultipart20220526-1-zyxhcw_html_9ae575dd8b0898c5.png)
+![Figure 24 A](figures/figure24_a.png)
 
-![](RackMultipart20220526-1-zyxhcw_html_554c5337f8e1d06c.png) ![](RackMultipart20220526-1-zyxhcw_html_e2e8a840ceade8a.png)
+![Figure 24 B](figures/figure24_b.png)
 
-Figure X: Learning curve of each classifier
+**Figure 24**: Learning curve of models fitted to the data transformed with HoG:
+
+**a)** Support Vector Machine; **b)** K-Nearest Neighbors; **c)** Random Forest; **d)** Stochastic Gradient Descent
+
 
 ### 6.2 Convolutional Neural Network - Model Evaluation and Testing
 
-| ![](RackMultipart20220526-1-zyxhcw_html_9240c4656c30933.png) | ![](RackMultipart20220526-1-zyxhcw_html_96c164d01eca53e8.png) |
-| --- | --- |
-| **(a)** | **(b)** |
-| **Fig. XX** Convolutional Neural Network: Model Evaluation and Testing after 554 epochs**a)** Training vs Validation Loss, **b)** Training vs Validation Accuracy |
+![Figure 25 A](figures/figure25_a.png) ![Figure 25 B](figures/figure25_b.png)
 
-| ![](RackMultipart20220526-1-zyxhcw_html_89b14e0288709184.png) | ![](RackMultipart20220526-1-zyxhcw_html_b9ab847b75790c21.png) |
-| --- | --- |
-| **(a)** | **(b)** |
-| **Fig. XX** Convolutional Neural Network: Model Evaluation and Testing after 554 epochs**a)** Confusion Matrix; **b)** Classification Report |
+**Figure 25**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
+**a)** Training vs Validation Loss, **b)** Training vs Validation Accuracy 
 
+![Figure 26](figures/figure26.png)
+**Figure 26**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
+**a)** Confusion Matrix; **b)** Classification Report 
 
 ## 7. Conclusion:
 
