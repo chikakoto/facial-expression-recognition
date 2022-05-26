@@ -8,40 +8,28 @@
 
 This project compares results of classification of static images by several machine learning algorithms with the goal of recognizing facial expression based on seven predefined classes of emotions. The algorithms selected for the project included support-vector machine (SVM), k-nearest neighbors (KNN), stochastic gradient descent classifier (SGD), and random forest. Additionally, as one of the questions that we were interested in answering was whether or not conventional machine learning algorithms would be outperformed by deep learning methods, we also built a convolutional neural network using Keras and TensorFlow for comparison purposes.
 
-The results obtained during the work on the project showed that even though a convolutional neural network achieved higher performance, the improvement in accuracy of the class prediction was not overwhelming when traditional algorithms were used together with feature transformation and dimension reduction techniques as a part of the machine learning pipeline. The highest accuracy of 68.57% on the validation set was achieved with a convolutional neural network, while the best out of conventional algorithms - Random Forest reached 55.1% validation accuracy when it was used with principal component analysis and a histogram of oriented gradient (HOG) feature descriptor in ML pipeline.
+The results obtained during the work on the project showed that even though a convolutional neural network achieved higher performance, the improvement in accuracy of the class prediction was not overwhelming when traditional algorithms were used together with feature transformation and dimension reduction  techniques as a part of the machine learning pipeline. The highest accuracy of 68.57% on the validation set was achieved with a convolutional neural network, while the best out of conventional algorithms - Random Forest reached 55.1% validation accuracy when it was used with principal component analysis and a histogram of oriented gradient (HOG) feature descriptor in ML pipeline.
 
 
 ## 2. Introduction:
 
-State your data and research question(s). And why it is important
+Teaching machines to be able to recognize emotions is an exciting topic in machine learning which is popular not only in computer vision, but also in natural language processing as sentiment analysis. However, the task of identifying facial expression as an indicator of a certain emotion is subjective by design and could be quite challenging even for humans when different people could see different emotions in the same facial expression. Even though the debate about the ability of AI to recognize emotions at all [1] is still ongoing, in recent years the market of emotion recognition has grown into a multibillion dollar industry with various implementations in fields such as public safety, healthcare, marketing research etc.
 
-Can machines recognize human emotion? Does it make AI to communicate with humans better?
-
-Teaching machines to be able to recognize emotions is an exciting topic in machine learning which is popular not only in computer vision, but also in natural language processing as sentiment analysis. However, the task of identifying facial expression as an indicator of a certain emotion is subjective by design and could be quite challenging even for humans when different people could see different emotions in the same facial expression. Even though the debate about the ability of AI to recognize emotions at all ([see link here](https://www.theverge.com/2019/7/25/8929793/emotion-recognition-analysis-ai-machine-learning-facial-expression-review) or [this one](https://www.technologyreview.com/2019/07/26/238782/emotion-recognition-technology-artifical-intelligence-inaccurate-psychology/) instead) is still ongoing, in recent years the market of emotion recognition has grown into a multibillion dollar industry with various implementations in fields such as public safety, healthcare, marketing research etc.
-
-In our research, we first performed Exploratory Data Analysis (EDA), cleaned the dataset, and did resampling. Then, we standardized the data and used dimension reduction and feature transformation techniques, such as HoG and Bag of Visual Words. We then created machine learning pipelines for the conventional ML algorithms, such as SVM, KNN, Random Forest, and SGD and compared their results. As a benchmark, we used DummyClassifier as the &quot;null&quot; model and a benchmark throughout the experiment, we found that such model obtains accuracy of 22%. As a comparison, we also explored deep learning methods and built a convolutional neural network using TensorFlow and Keras, and looked into the activation map of the CNN.
+In our research, we first performed Exploratory Data Analysis (EDA), cleaned the dataset, and did resampling to address imbalance between classes. Then, we standardized the data and used dimension reduction and feature transformation techniques, such as HoG and Bag of Visual Words. We then created machine learning pipelines for the conventional ML algorithms, such as SVM, KNN, Random Forest, and SGD and compared their results. As a benchmark, we used DummyClassifier as the “null” model and a benchmark throughout the experiment, we found that such model obtains accuracy of 22%. As a comparison, we also explored deep learning methods and built a convolutional neural network using TensorFlow and Keras, and looked into the activation maps of the CNN.
 
 
 ## 3. Background:
 
-A number of papers on emotion recognition in images have been published in recent years, however, most of them are focusing on deep learning methods.
+A number of papers on emotion recognition in images have been published in recent years, however, most of them are focusing on deep learning methods. 
+“Challenges in Representation Learning: A report on three machine learning contests” by Ian J. Goodfellow1, Dumitru Erhan [2] gave us a good starting point providing an overview of different ways of approaching the problem and helped us formulate the goal of the project. The key difference with our approach was that they often describe CNNs that were built through transfer learning when a model pre-trained on a large dataset was being used as the base later fine-tuned for a particular problem, as opposed to our CNN that was built from scratch.
 
-&quot;Challenges in Representation Learning: A report on three machine learning contests&quot; by Ian J. Goodfellow1, Dumitru Erhan [[3](#kix.6smobwyq46y4)] gave us a good starting point providing an overview of different ways of approaching the problem and helped us formulate the goal of the project. The key difference with our approach was that they often describe CNNs that were built through transfer learning when a model pre-trained on a large dataset was being used as the base later fine-tuned for a particular problem, as opposed to our CNN that was built from scratch.
-
-[Example 2: Facial expression and attributes recognition based on multi-task learning of lightweight neural networks, Andrey V. Savchenko
-
-Example 3:]
-
-Recognizing Emotion from Static Images by Jason Chen, Theodora Chu, Priyanka Sekhar
-
-Even before Deep learning became a trend, many researchers have been trying to solve facial emotion recognition with conventional machine learning. The first thing that you may consider to try is to focus on the shapes of the parts that make up the face, such as the eyes, nose, and mouth, and the individual differences in their arrangement, and extract feature points from these and use them for recognition. However, it is quite difficult to accurately extract these parts from the facial image and even if each part can be extracted well, it is not so easy to use the difference in similar shapes for recognition. Therefore, instead of using such techniques, research is being actively conducted in the direction of treating the face image itself as a pattern and applying the statistical pattern recognition method. For example, as a classic technique, EigenFace was proposed by Turk and Pentland[[6](#kix.6ubnm95yt1zm)] in 1994 and later improved by using linear discriminant analysis (LDA) to produce FisherFace[[7](#kix.jdz7ll93tss3)] in 1997 and even recently there have been study on this method, &quot;Face Recognition Using Fisherface Method&quot; by Anggo and Arapu[[5](#va2giguwcn3e)]. There are many feature transformation techniques for recent years. &quot;Empirical Evaluation of SVM for Facial Expression Recognition&quot; by S. Saeed, J. Baber, M. Bakhtyar [[4](#yzr37s14eg93)] delved into details of using Histogram of Oriented Gradients (HOG) and extending support vector machines for multi-class classification, using either one-vs-one or one-vs- all approach. Bag of Visual Words has been also popular in image pattern recognition[[8](#m7of20scmaat)].
+Even before Deep learning became a trend, many researchers have been trying to solve facial emotion recognition with conventional machine learning. The first thing that you may consider to try is to focus on the shapes of the parts that make up the face, such as the eyes, nose, and mouth, and the individual differences in their arrangement, and extract feature points from these and use them for recognition. However, it is quite difficult to accurately extract these parts from the facial image and even if each part can be extracted well, it is not so easy to use the difference in similar shapes for recognition. Therefore, instead of using such techniques, research is being actively conducted in the direction of treating the face image itself as a pattern and applying the statistical pattern recognition method. For example, as a classic technique, EigenFace was proposed by Turk and Pentland[3] in 1994 and later improved by using linear discriminant analysis (LDA) to produce FisherFace[4] in 1997 and even recently there have been study on this method, “Face Recognition Using Fisherface Method” by Anggo and Arapu[5]. There are many feature transformation techniques for recent years. “Empirical Evaluation of SVM for Facial Expression Recognition” by S. Saeed, J. Baber, M. Bakhtyar [6] delved into details of using Histogram of Oriented Gradients (HOG) and extending support vector machines for multi-class classification, using either one-vs-one or one-vs- all approach. Bag of Visual Words has been also popular in image pattern recognition[7].
 
 
 ## 4. Data:
 
-We selected Facial Expression Recognition 2013 (FER-2013) dataset [[1](#4qlicmppmo5w)] for the project which was created by Pierre Luc Carrier and Aaron Courville, and was widely publicized during a Kaggle competition [[2](#87aju3m0zk7e)]. In the paper called &quot;Challenges in Representation Learning: A report on three machine learning contests&quot; by Ian J. Goodfellow1, Dumitru Erhan we found background on how the dataset was created: &quot;The dataset was created using the Google image search API to search for images of faces that match a set of 184 emotion-related keywords like &quot;blissful&quot;, &quot;enraged,&quot; etc. These keywords were combined with words related to gender, age or ethnicity, to obtain nearly 600 strings which were used as facial image search queries. The first 1000 images returned for each query were kept for the next stage of process- ing. OpenCV face recognition was used to obtain bounding boxes around each face in the collected images. Human labelers then rejected incorrectly labeled images, corrected the cropping if necessary, and filtered out some duplicate images. Approved, cropped images were then resized to 48x48 pixels and converted to grayscale.&quot; [[3](#kix.6smobwyq46y4)]
-
-The original dataset contained 35,887 images, out of which 28,709 images belonged to the train set and the remaining 7,178 images were assigned to the test set. All images were then grouped into seven categories of emotions with 4,953 images labeled as &quot;angry&quot;, 547 &quot;disgust&quot; images, 5,127 &quot;fear&quot;, 8,989 &quot;happy&quot;, 6,077 &quot;sad&quot;, 4,002 &quot;surprise&quot;, and 6,198 &quot;neutral&quot;. During the EDA stage the dataset was inspected and images that contained black or white pixels only were removed. In addition, in order to address the issue with a severe imbalance between the classes, when images in the minority &quot;disgust&quot; class were only about 6% compared to the majority &quot;happy&quot; class, the &quot;disgust&quot; class was upsampled to 4,000 images (see Fig.1 for details about the data distribution between the classes before and after). The resampled dataset consists of 31,432 training images and 7,896 test images.
+We selected Facial Expression Recognition 2013 (FER-2013) dataset [8] for the project which was created by Pierre Luc Carrier and Aaron Courville, and was widely publicized during a Kaggle competition [9]. In the paper called “Challenges in Representation Learning: A report on three machine learning contests” by Ian J. Goodfellow1, Dumitru Erhan we found background on how the dataset was created: “The dataset was created using the Google image search API to search for images of faces that match a set of 184 emotion-related keywords like “blissful”, “enraged,” etc. These keywords were combined with words related to gender, age or ethnicity, to obtain nearly 600 strings which were used as facial image search queries. The first 1000 images returned for each query were kept for the next stage of process- ing. OpenCV face recognition was used to obtain bounding boxes around each face in the collected images. Human labelers then rejected incorrectly labeled images, corrected the cropping if necessary, and filtered out some duplicate images. Approved, cropped images were then resized to 48x48 pixels and converted to grayscale.” [2]
+The original dataset contained 35,887 images, out of which 28,709 images belonged to the train set and the remaining 7,178 images were assigned to the test set. All images were then grouped into seven categories of emotions with 4,953 images labeled as “angry”, 547 “disgust” images, 5,127 “fear”, 8,989 “happy”, 6,077 “sad”, 4,002 “surprise”, and 6,198 “neutral”. During the EDA stage the dataset was inspected and images that contained black or white pixels only were removed. In addition, in order to address the issue with a severe imbalance between the classes, when images in the minority “disgust” class were only about 6% compared to the majority “happy” class, the “disgust” class was upsampled to 4,000 images (see Fig.1 for details about the data distribution between the classes before and after). The resampled dataset consists of 31,432 training images and 7,896 test images.
 
 
 ![Figure 1 A](figures/figure1_a.png) ![Figure 1 B](figures/figure1_b.png)
@@ -49,12 +37,6 @@ The original dataset contained 35,887 images, out of which 28,709 images belonge
 **Figure 1**: Distribution of images between the classes in the original dataset (left), compared to the distribution after upsampling of the minority “disgust class (right)
 
 All images were preprocessed and transformed into numpy arrays, flattened and rescaled between 0 and 1 by either dividing each pixel value by 255. In addition, both training and test sets were reshaped as needed when fitting the data to the tested models.
-
-We also realized that there are some images that don&#39;t look as labeled and it may affect the experiment.
-
-![Figure 2](figures/figure2.png)
-
-**Figure 2**: Mislabeled images
 
 
 ## 5. Methods:
@@ -69,23 +51,23 @@ The simplest pattern recognition method is based on matching between patterns, b
 
 We first standardized the resampled dataset and then performed the principal component analysis. Out of 2304 original components we identified 115 principal components that make up more than 90% of the explained variance in the data and used these principal components for the analysis.
 
-![Figure 3](figures/figure3.png)
+![Figure 2](figures/figure2.png)
 
-**Figure 3**: Explained variance ratio vs Principal components
+**Figure 2**: Explained variance ratio vs Principal components
 
 The first 34 principal components contain more than 80% of the cumulative explained variance ratio. As shown in Figure 4, the first few components take care of lightning conditions and later components extract identifying features, such as the eyes, nose and mouth.
 
-![Figure 4](figures/figure4.png)
+![Figure 3](figures/figure3.png)
 
-**Figure 4**: Images of first 20 components of PCA
+**Figure 3**: Images of first 20 components of PCA
 
 #### 5.1.2 FisherFace
 
 Fisherface is one of the popular algorithms used in face recognition, and is widely believed to be superior to other techniques, such as Eigenface because of the effort to maximize the separation between classes in the training process. For this method, linear discriminant analysis (LDA) is applied after the PCA. LDA finds the axis that distinguishes between two or more classes. It does not get affected easily by differences in lighting and angles compared to EigenFace. We use the PCA data from 5.1 EigenFace, with a standardized resampled dataset and 115 components, and then apply LDA. Six examples from the FisherFace result are shown in Figure 5.
 
-![Figure 5](figures/figure5.png)
+![Figure 4](figures/figure4.png)
 
-**Figure 5**: Images of fisherface
+**Figure 4**: Images of fisherface
 
 ### 5.2 Feature transformation
 
@@ -93,17 +75,17 @@ Fisherface is one of the popular algorithms used in face recognition, and is wid
 
 HoG is a popular feature descriptor for object detection in an image by first computing the horizontal and vertical gradient images, then computing the gradient histograms and normalizing across blocks, and finally flattening into a feature descriptor vector [10]. It can capture edge structure that is characteristic of local shapes and structure invariant to local photometric and geometric transformations. It is also known to outperform PCA/SIFT for a large-scale dataset [11]. Which makes HoG the perfect candidate for a feature descriptor for a large image dataset like the facial expression dataset. We have also observed that HoG was much faster and more accurate compared to SIFT and PCA. After performing HOG feature descriptor our input data feature has decreased from 2304 columns to only 1152 columns while the accuracy of our random forest model has increased by 22%.
 
-![Figure 6](figures/figure6.png)
+![Figure 5](figures/figure5.png)
 
-**Figure 6**: Comparison of images before and after applying histogram of oriented gradients (HoG)
+**Figure 5**: Comparison of images before and after applying histogram of oriented gradients (HoG)
 
 #### 5.2.2 Bag of Visual Words / Features
 
 Bag of Visual Words is a widely used image feature representation in object recognition and is a vector-quantized histogram of many local features in an image. This method was originally derived from the Bag of Words model that is often used for Natural Language Processing. First, 128 dimensional local features were extracted from each image. In our experiment, we used SIFT, KAZE, ORB, BRISK, AKAZE shown in Figure 7 to extract feature descriptors. Then, cluster all feature vectors into K clusters by using K-means. Each centroid, center vector, of K clusters is a visual word and also represented by a 128 dimensional vector. Finally, the entire image was converted into a histogram with visual words as the dimension. This is done by searching for the closest visual word for each local feature in the image and voting for that visual word. Eventually this histogram will be the feature vector of the image.
 
-![Figure 7](figures/figure7.png)
+![Figure 6](figures/figure6.png)
 
-**Figure 7**: Visualization of SIFT, KAZE, ORB, BRISK, and AKAZE feature detection algorithms
+**Figure 6**: Visualization of SIFT, KAZE, ORB, BRISK, and AKAZE feature detection algorithms
 
 ### 5.3 Conventional Machine Learning
 
@@ -133,7 +115,7 @@ We evaluated a variety of model architectures, experimented with optimizers, los
 - Flatten layer followed by two sets of fully connected layers, each with its own dropout layer (30% and 25%).
 - Lastly, a fully connected layer with 7 units and a softmax activation function for the final prediction of the image class.
 
-![Figure 8](figures/figure8.png)
+![Figure 7](figures/figure7.png)
 
 **Figure 8**: Convolutional Neural Network with 15 layers:  4 sets of convolutional and pooling layers; flatten layer followed by two sets of fully connected layers, each with its own dropout layer, and a fully connected layer for the final prediction of the image class.
 
@@ -151,30 +133,30 @@ One of the steps that helped us reduce overfitting and significantly increase tr
 
 To look at what happens under the hood of the neural network we looked at activation of the network during the forward pass. Simply put activation functions help determine whether a given neuron within a layer gets activated or not based on the input data it receives. To visualize the transformations of an image as it goes through filters of each layer we dissected the model by layers to see how the image is changing as it goes through filters of each layer making the output of one layer an input for the next. Figures xx through xx illustrate how the image is being transformed by the first four layers of the neural network.
 
+![Figure 8](figures/figure8.png)
+
+**Figure 8**: 6 out of 32 images (48 x 48 each) from the first Convolutional layer, 3x3 kernel size, RELU activation function
+
 ![Figure 9](figures/figure9.png)
 
-**Figure 9**: 6 out of 32 images (48 x 48 each) from the first Convolutional layer, 3x3 kernel size, RELU activation function
+**Figure 9**: 6 out of 32 images (24 x 24 each) from the first Pooling Layer
 
 ![Figure 10](figures/figure10.png)
 
-**Figure 10**: 6 out of 32 images (24 x 24 each) from the first Pooling Layer
+**Figure 10**: 6 out of 64 images (22 x 22 each) from the Second Convolutional Layer
 
 ![Figure 11](figures/figure11.png)
 
-**Figure 11**: 6 out of 64 images (22 x 22 each) from the Second Convolutional Layer
-
-![Figure 12](figures/figure12.png)
-
-**Figure 12**: 6 out of 64 images (11 x 11 each) from the first Second Pooling Layer
+**Figure 11**: 6 out of 64 images (11 x 11 each) from the first Second Pooling Layer
 
 
 As the image goes deeper into the layers of the model, the activations start looking more sparse and localized. Figure xx shows activations of the same image by layers
 
-![Figure 13 A](figures/figure13_a.png) ![Figure 13 B](figures/figure13_b.png)
+![Figure 12 A](figures/figure12_a.png) ![Figure 12 B](figures/figure12_b.png)
 
-![Figure 13 C](figures/figure13_c.png) ![Figure 13 D](figures/figure13_d.png)
+![Figure 12 C](figures/figure12_c.png) ![Figure 12 D](figures/figure12_d.png)
 
-**Figure 13**: Activation Maps for inner layer for a convolutional neural network:
+**Figure 12**: Activation Maps for inner layer for a convolutional neural network:
 
 **a)** Third Convolutional Layer (9x9 images) **b)** Third Pooling Layer (4x4 images)
 
@@ -189,26 +171,26 @@ As the image goes deeper into the layers of the model, the activations start loo
 
 To compare the results achieved by for four simple Machine Learning algorithms, we use EigenFace, FisherFace and HoG data as described in 5. Methods section. The following figure shows the test accuracy for each Machine Learning algorithm. Among SVM, EigenFace was the highest score, however, the training accuracy was 99% which means that the result is way overfitting. Therefore, HoG of 47% testing accuracy with 53% training accuracy makes the best result for SVM. HoG is also the highest for KNN with 51% accuracy. We use a small number of neighbors for this comparison, therefore training accuracy becomes 99%. Overall, the highest test accuracy is 51% for the Random Forest algorithm. Most of the accuracy are below 50% which seems bad, however, it is acceptable compared to the 22% benchmark.
 
-![Figure 14](figures/figure14.png)
+![Figure 13](figures/figure13.png)
 
-**Figure 14**: ML testing accuracy comparison
+**Figure 13**: ML testing accuracy comparison
 
 We also use the Bag of Visual Word technique to compare for SVM and KNN, however, all of the descriptor cases are below the benchmark. Therefore, we drop this technique to apply for further analysis and other Machine Learning algorithms. More detailed comparison for each technique are available in appendix.
 
-![Figure 15](figures/figure15.png)
+![Figure 14](figures/figure14.png)
 
-**Figure 15**: Comparison of testing accuracy for SVM and KNN classifiers on data transformed using Bag of VisualWords
+**Figure 14**: Comparison of testing accuracy for SVM and KNN classifiers on data transformed using Bag of VisualWords
 
 
 #### 6.1.2 Confusion matrices
 
 All of the confusion matrices show the highest accuracy for the happy label due to the amount of the happy label data we trained. Disgust also shows high accuracy compared to any other labels and it is because we resampled the disgust label data.
 
-![Figure 16_A](figures/figure16_a.png)
+![Figure 15_A](figures/figure15_a.png)
 
-![Figure 16_B](figures/figure16_b.png)
+![Figure 15_B](figures/figure15_b.png)
 
-**Figure 16**: Confusion matrices for the validation accuracy of models fitted to the data transformed with HoG:
+**Figure 15**: Confusion matrices for the validation accuracy of models fitted to the data transformed with HoG:
 
 **a)** Support Vector Machine; **b)** K-Nearest Neighbors; **c)** Random Forest; **d)** Stochastic Gradient Descent
 
@@ -216,22 +198,22 @@ All of the confusion matrices show the highest accuracy for the happy label due 
 
 Here are the overall performance scores for each Machine Learning Classifier. Random Forest marks the highest F1 score and second is KNN. Precision of Random Forest is 64% which are very high compared to other classifiers.
 
-![Figure 17](figures/figure17.png)
+![Figure 16](figures/figure16.png)
 
-**Figure 17**: Overall performance metrics for each model: Support Vector Machine, K-Nearest Neighbors,Random Forest, Stochastic Gradient Descent Classifier
+**Figure 16**: Overall performance metrics for each model: Support Vector Machine, K-Nearest Neighbors,Random Forest, Stochastic Gradient Descent Classifier
 
 
 #### 6.1.4 Classification Reports
 
 Classification report also indicates a similar result as the confusion matrices. Highest F1-score of each classification are disgust, happy and surprise labels. Happy and disgust recall is higher than precision, however surprise precision is higher than its recall. Happy label shows high scores because it has more data than any other labels. Disgust score is not precise due to the resampling. Surprise label has the lowest number of data, therefore the precision could mark higher than recall.
 
+![Figure 17](figures/figure17.png)
+
+**Figure 17**: Classification report for SVM and KNN classifiers showing precision, recall, and F1 score by class. Both models were trained on the data transformed with HoG.
+
 ![Figure 18](figures/figure18.png)
 
-**Figure 18**: Classification report for SVM and KNN classifiers showing precision, recall, and F1 score by class. Both models were trained on the data transformed with HoG.
-
-![Figure 19](figures/figure19.png)
-
-**Figure 19**: Classification report for Random Forest and SGD classifiers showing precision, recall, and F1 score by class. Both models were trained on the data transformed with HoG.
+**Figure 18**: Classification report for Random Forest and SGD classifiers showing precision, recall, and F1 score by class. Both models were trained on the data transformed with HoG.
 
 
 #### 6.1.5 Validation curve
@@ -240,20 +222,20 @@ Validation curve for SVM increases as parameter C becomes larger, and the model 
 
 Verification curve for SVM
 
-![Figure 20](figures/figure20.png)
+![Figure 19](figures/figure19.png)
 
-**Figure 20**: Validation curve for the SVM classifier
+**Figure 19**: Validation curve for the SVM classifier
+
+![Figure 20](figures/figure20.png)
+**Figure 20**: Accuracy of the KNN model as a function of number of neighbors K
 
 ![Figure 21](figures/figure21.png)
-**Figure 21**: Accuracy of the KNN model as a function of number of neighbors K
+
+**Figure 21**: Validation curve for the Random Forest classifier
 
 ![Figure 22](figures/figure22.png)
 
-**Figure 22**: Validation curve for the Random Forest classifier
-
-![Figure 23](figures/figure23.png)
-
-**Figure 23**: Validation curve for SGD classifier
+**Figure 22**: Validation curve for SGD classifier
 
 
 #### 6.1.6 Learning curve
@@ -264,24 +246,26 @@ For the learning curve, KNN and Random forest show 100% training accuracy from t
 
 Learning curve for SVM with HoG Learning curve for KNN with HoG
 
-![Figure 24 A](figures/figure24_a.png)
+![Figure 23 A](figures/figure23_a.png)
 
-![Figure 24 B](figures/figure24_b.png)
+![Figure 23 B](figures/figure23_b.png)
 
-**Figure 24**: Learning curve of models fitted to the data transformed with HoG:
+**Figure 23**: Learning curve of models fitted to the data transformed with HoG:
 
 **a)** Support Vector Machine; **b)** K-Nearest Neighbors; **c)** Random Forest; **d)** Stochastic Gradient Descent
 
 
 ### 6.2 Convolutional Neural Network - Model Evaluation and Testing
 
-![Figure 25 A](figures/figure25_a.png) ![Figure 25 B](figures/figure25_b.png)
+<img src="figures/figure24_a.png" width="400"> <img src="figures/figure24_b.png" width="400">
 
-**Figure 25**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
+**Figure 24**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
 **a)** Training vs Validation Loss, **b)** Training vs Validation Accuracy 
 
-![Figure 26](figures/figure26.png)
-**Figure 26**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
+![Figure 25](figures/figure25.png)
+
+**Figure 25**: Convolutional Neural Network: Model Evaluation and Testing after 554 epochs
+
 **a)** Confusion Matrix; **b)** Classification Report 
 
 ## 7. Conclusion:
