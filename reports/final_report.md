@@ -333,9 +333,10 @@ https://www.kaggle.com/datasets/msambare/fer2013
 9. Research Prediction Competition: Challenges in Representation Learning: Facial Expression Recognition Challenge<br>
 https://www.kaggle.com/competitions/challenges-in-representation-learning-facial-expression-recognition-challenge/data 
 
-10. Sandipan Dey “Python Image Processing Cookbook” Chapter 8 (2020) N. Dalal, B. Triggs, “Histograms of Oriented Gradients for Human Detection”, 2005<br>  https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf
+10. Sandipan Dey “Python Image Processing Cookbook” Chapter 8 (2020) N. Dalal, B. Triggs, “Histograms of Oriented Gradients for Human Detection”, 2005<br> https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf
 
 11. Dahinden, C., 2009. An improved Random Forests approach with application to the performance prediction challenge datasets. Hands on Pattern Recognition. Microtome. Breiman, L., 2001. Random forests. Machine learning, 45(1), pp.5–32
+http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=A7F3826C232797EE59093B0B65E23B16?doi=10.1.1.546.9501&rep=rep1&type=pdf
 
 
 
@@ -345,16 +346,16 @@ https://www.kaggle.com/competitions/challenges-in-representation-learning-facial
 
 The following figures show the test accuracy on SVM and KNN with different types of data in different scales or different parameters. The first figure shows the accuracy of the original dataset, scaled original dataset, which pixels are divided by 255, HoG on original dataset, Rescaled HoG on original dataset. 
 
-![Figure 29](figures/figure29.png)
+<img src="figures/figure29.png" width="500">
 
 The next figures are for Eigenface and Fisherface. For Eigenface, PCA on the original dataset, PCA on normalized data, PCA on standardized data, PCA on scaled data, and last one is the inverted image data from PCA on the original dataset which did the worst on SVM. Fisherface is almost the same as the PCA, and those are PCA + LDA on the original dataset, on normalized data, on standardized data or on scaled data. 
 
-![Figure 30](figures/figure30.png) ![Figure 31](figures/figure31.png)
+<img src="figures/figure30.png" width="400"> <img src="figures/figure31.png" width="400">
 
 The following figures are each descriptor in a different number of visual words, K. Original means that Bag of feature on the original dataset and PCA means that Bag of feature on PCA dataset. All of the results are below the benchmark. 
 
-![Figure 32](figures/figure32.png) ![Figure 32](figures/figure32.png)
+<img src="figures/figure32.png" width="400"> <img src="figures/figure33.png" width="400">
 
-![Figure 33](figures/figure33.png) ![Figure 34](figures/figure34.png)
+<img src="figures/figure34.png" width="400"> <img src="figures/figure35.png" width="400">
 
-![Figure 34](figures/figure34.png)
+<img src="figures/figure36.png" width="400">
