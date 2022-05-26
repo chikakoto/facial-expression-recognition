@@ -16,17 +16,14 @@ Also, all the feature transfered data are at https://drive.google.com/file/d/1gU
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <- Jupyter notebooks we used for this projects.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── reports            <- Report and slide, such as PDF and markdown.
+    │   └── figures        <- Graphics and figures to be used in reporting
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
-    │   └── webcam         <- Webcam live facial expresssion detection script
-    │       └── fer.py
+    │   └── webcam         
+    │       └── fer.py     <- Webcam live facial expresssion detection script
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
