@@ -43,7 +43,8 @@ We selected Facial Expression Recognition 2013 (FER-2013) dataset [[1](#4qlicmpp
 
 The original dataset contained 35,887 images, out of which 28,709 images belonged to the train set and the remaining 7,178 images were assigned to the test set. All images were then grouped into seven categories of emotions with 4,953 images labeled as &quot;angry&quot;, 547 &quot;disgust&quot; images, 5,127 &quot;fear&quot;, 8,989 &quot;happy&quot;, 6,077 &quot;sad&quot;, 4,002 &quot;surprise&quot;, and 6,198 &quot;neutral&quot;. During the EDA stage the dataset was inspected and images that contained black or white pixels only were removed. In addition, in order to address the issue with a severe imbalance between the classes, when images in the minority &quot;disgust&quot; class were only about 6% compared to the majority &quot;happy&quot; class, the &quot;disgust&quot; class was upsampled to 4,000 images (see Fig.1 for details about the data distribution between the classes before and after). The resampled dataset consists of 31,432 training images and 7,896 test images.
 
-![](RackMultipart20220526-1-zyxhcw_html_16ae5f57b58fde1.png) ![](RackMultipart20220526-1-zyxhcw_html_6160145d170a947.png)
+
+![Figure 1 A](figures/figure1_a.png) ![Figure 1 B](figures/figure1_b.png)
 
 **Figure 1** : Distribution of images between the classes in the original dataset (left), compared to the distribution after upsampling of the minority &quot;disgust class (right).
 
@@ -51,9 +52,7 @@ All images were preprocessed and transformed into numpy arrays, flattened and re
 
 We also realized that there are some images that don&#39;t look as labeled and it may affect the experiment.
 
-![](RackMultipart20220526-1-zyxhcw_html_dcc2551317b9ea83.jpg) ![](RackMultipart20220526-1-zyxhcw_html_683ee2c8938b62d1.jpg) ![](RackMultipart20220526-1-zyxhcw_html_f48c11cde04e6a28.jpg) ![](RackMultipart20220526-1-zyxhcw_html_86dd127ba50cf206.jpg) ![](RackMultipart20220526-1-zyxhcw_html_f81103b6636732e4.jpg)
-
-Happy Happy Surprise Fear Angry
+![Figure 2](figures/figure2.png)
 
 **Figure 2** : Mislabeled images
 
@@ -70,13 +69,13 @@ The simplest pattern recognition method is based on matching between patterns, b
 
 We first standardized the resampled dataset and then performed the principal component analysis. Out of 2304 original components we identified 115 principal components that make up more than 90% of the explained variance in the data and used these principal components for the analysis.
 
-![](RackMultipart20220526-1-zyxhcw_html_98ec807765d10dcc.png)
+![Figure 3](figures/figure3.png)
 
 **Figure 3** : Explained variance ratio vs Principal components
 
 The first 34 principal components contain more than 80% of the cumulative explained variance ratio. As shown in Figure 4, the first few components take care of lightning conditions and later components extract identifying features, such as the eyes, nose and mouth.
 
-![](RackMultipart20220526-1-zyxhcw_html_959b11f6d7e5ae9e.png)
+![Figure 4](figures/figure4.png)
 
 **Figure 4** : Images of first 20 components of PCA
 
@@ -84,7 +83,7 @@ The first 34 principal components contain more than 80% of the cumulative explai
 
 Fisherface is one of the popular algorithms used in face recognition, and is widely believed to be superior to other techniques, such as Eigenface because of the effort to maximize the separation between classes in the training process. For this method, linear discriminant analysis (LDA) is applied after the PCA. LDA finds the axis that distinguishes between two or more classes. It does not get affected easily by differences in lighting and angles compared to EigenFace. We use the PCA data from 5.1 EigenFace, with a standardized resampled dataset and 115 components, and then apply LDA. Six examples from the FisherFace result are shown in Figure 5.
 
-![](RackMultipart20220526-1-zyxhcw_html_28d38c0dcb37e308.png)
+![Figure 5](figures/figure5.png)
 
 **Figure 5** : Images of fisherface
 
@@ -94,7 +93,7 @@ Fisherface is one of the popular algorithms used in face recognition, and is wid
 
 HoG is a popular feature descriptor for object detection in an image by first computing the horizontal and vertical gradient images, then computing the gradient histograms and normalizing across blocks, and finally flattening into a feature descriptor vector [10]. It can capture edge structure that is characteristic of local shapes and structure invariant to local photometric and geometric transformations. It is also known to outperform PCA/SIFT for a large-scale dataset [11]. Which makes HoG the perfect candidate for a feature descriptor for a large image dataset like the facial expression dataset. We have also observed that HoG was much faster and more accurate compared to SIFT and PCA. After performing HOG feature descriptor our input data feature has decreased from 2304 columns to only 1152 columns while the accuracy of our random forest model has increased by 22%.
 
-![](RackMultipart20220526-1-zyxhcw_html_66525b0d4a2e56b8.png) ![](RackMultipart20220526-1-zyxhcw_html_a456b078916eadcf.png)
+![Figure 6](figures/figure6.png)
 
 **Figure 6** : Comparison of images before and after applying histogram of oriented gradients (HoG)
 
@@ -102,7 +101,7 @@ HoG is a popular feature descriptor for object detection in an image by first co
 
 Bag of Visual Words is a widely used image feature representation in object recognition and is a vector-quantized histogram of many local features in an image. This method was originally derived from the Bag of Words model that is often used for Natural Language Processing. First, 128 dimensional local features were extracted from each image. In our experiment, we used SIFT, KAZE, ORB, BRISK, AKAZE shown in Figure 7 to extract feature descriptors. Then, cluster all feature vectors into K clusters by using K-means. Each centroid, center vector, of K clusters is a visual word and also represented by a 128 dimensional vector. Finally, the entire image was converted into a histogram with visual words as the dimension. This is done by searching for the closest visual word for each local feature in the image and voting for that visual word. Eventually this histogram will be the feature vector of the image.
 
-![](RackMultipart20220526-1-zyxhcw_html_975acc92bf4e567b.png)
+![Figure 7](figures/figure7.png)
 
 **Figure 7** : Visualization of SIFT, KAZE, ORB, BRISK, and AKAZE feature detection algorithms
 
@@ -134,9 +133,9 @@ We evaluated a variety of model architectures, experimented with optimizers, los
 - Flatten layer followed by two sets of fully connected layers, each with its own dropout layer (30% and 25%).
 - Lastly, a fully connected layer with 7 units and a softmax activation function for the final prediction of the image class.
 
-![](RackMultipart20220526-1-zyxhcw_html_64b76c9dcd4a2b0f.png)
+![Figure 8](figures/figure8.png)
 
-**Figure XXX** Convolutional Neural Network with 15 layers: 4 sets of convolutional and pooling layers; flatten layer followed by two sets of fully connected layers, each with its own dropout layer, and a fully connected layer for the final prediction of the image class.
+**Figure 8** : Convolutional Neural Network with 15 layers: 4 sets of convolutional and pooling layers; flatten layer followed by two sets of fully connected layers, each with its own dropout layer, and a fully connected layer for the final prediction of the image class.
 
 #### Model Parameters and Data Preprocessing
 
@@ -152,38 +151,43 @@ One of the steps that helped us reduce overfitting and significantly increase tr
 
 To look at what happens under the hood of the neural network we looked at activation of the network during the forward pass. Simply put activation functions help determine whether a given neuron within a layer gets activated or not based on the input data it receives. To visualize the transformations of an image as it goes through filters of each layer we dissected the model by layers to see how the image is changing as it goes through filters of each layer making the output of one layer an input for the next. Figures xx through xx illustrate how the image is being transformed by the first four layers of the neural network.
 
-![](RackMultipart20220526-1-zyxhcw_html_b9a26d9cb8a61fcd.png)
+![Figure 9](figures/figure9.png)
 
-**Figure XX** 6 out of 32 images (48 x 48 each) from the first Convolutional layer, 3x3 kernel size, RELU activation function
+**Figure 9** : 6 out of 32 images (48 x 48 each) from the first Convolutional layer, 3x3 kernel size, RELU activation function
 
-![](RackMultipart20220526-1-zyxhcw_html_6470af738854e75a.png)
+![Figure 10](figures/figure10.png)
 
-**Figure XX** 6 out of 32 images (24 x 24 each) from the first Pooling Layer
+**Figure 10** : 6 out of 32 images (24 x 24 each) from the first Pooling Layer
 
-![](RackMultipart20220526-1-zyxhcw_html_4a7dd79397ae857a.png)
+![Figure 11](figures/figure11.png)
 
-**Figure XX** 6 out of 64 images (22 x 22 each) from the Second Convolutional Layer
+**Figure 11** : 6 out of 64 images (22 x 22 each) from the Second Convolutional Layer
 
-![](RackMultipart20220526-1-zyxhcw_html_a012cf8a71708c6c.png)
+![Figure 12](figures/figure12.png)
 
-**Figure XX** 6 out of 64 images (11 x 11 each) from the first Second Pooling Layer
+**Figure 12** : 6 out of 64 images (11 x 11 each) from the first Second Pooling Layer
 
 As the image goes deeper into the layers of the model, the activations start looking more sparse and localized. Figure xx shows activations of the same image by layers
 
-|
- |
- |
-| --- | --- |
-| ![](RackMultipart20220526-1-zyxhcw_html_53680aac1acf93d4.png) | ![](RackMultipart20220526-1-zyxhcw_html_d6e0f2ef138e4584.png) |
-| **(a)** | **(b)** |
-| **Figure XX** 6 out of 64 images (11 x 11 each) from the first Third Convolutional Layer | **Figure XX** 6 out of 64 images (22 x 22 each) from the Third Pooling Layer |
-| ![](RackMultipart20220526-1-zyxhcw_html_4af30c73c6f8899.png) | ![](RackMultipart20220526-1-zyxhcw_html_2308817a7b5dd2f2.png) |
+![Figure 13](figures/figure13.png) ![Figure 14](figures/figure14.png)
+
+**(a)**  **(b)** 
+
+**Figure 13** : 6 out of 64 images (11 x 11 each) from the first Third Convolutional Layer 
+
+**Figure 14** : 6 out of 64 images (22 x 22 each) from the Third Pooling Layer 
+
+![Figure 15](figures/figure15.png) ![Figure 16](figures/figure16.png)
+
 | **(c)** | **(d)** |
-| Figure XX 6 out of 64 images (11 x 11 each) from the first Third Convolutional Layer | Figure XX 6 out of 64 images (22 x 22 each) from the Third Pooling Layer |
+
+**Figure 15** : 6 out of 64 images (11 x 11 each) from the first Third Convolutional Layer 
+
+**Figure 16** : 6 out of 64 images (22 x 22 each) from the Third Pooling Layer
+
 | **Figure XX** Activation Maps for inner layer for a convolutional neural network:
 1. X out of 64 images (9 x 9 each) from the first Third Convolutional Layer
 2.
- |
 
 
 ## 6. Evaluation:
@@ -194,25 +198,25 @@ As the image goes deeper into the layers of the model, the activations start loo
 
 To compare the results achieved by for four simple Machine Learning algorithms, we use EigenFace, FisherFace and HoG data as described in 5. Methods section. The following figure shows the test accuracy for each Machine Learning algorithm. Among SVM, EigenFace was the highest score, however, the training accuracy was 99% which means that the result is way overfitting. Therefore, HoG of 47% testing accuracy with 53% training accuracy makes the best result for SVM. HoG is also the highest for KNN with 51% accuracy. We use a small number of neighbors for this comparison, therefore training accuracy becomes 99%. Overall, the highest test accuracy is 51% for the Random Forest algorithm. Most of the accuracy are below 50% which seems bad, however, it is acceptable compared to the 22% benchmark.
 
-![](RackMultipart20220526-1-zyxhcw_html_5bfd693c1ec6a57d.png)
+![Figure 17](figures/figure17.png)
 
-Figure X: ML testing accuracy comparison
+**Figure 17**: ML testing accuracy comparison
 
 We also use the Bag of Visual Word technique to compare for SVM and KNN, however, all of the descriptor cases are below the benchmark. Therefore, we drop this technique to apply for further analysis and other Machine Learning algorithms. More detailed comparison for each technique are available in appendix.
 
-![](RackMultipart20220526-1-zyxhcw_html_58d0dbb17b118b3d.png)
+![Figure 18](figures/figure18.png)
 
-Figure X: ML testing accuracy comparison for BoVW
+**Figure 18**: ML testing accuracy comparison for BoVW
 
 #### 6.1.2 Confusion matrices
 
 All of the confusion matrices show the highest accuracy for the happy label due to the amount of the happy label data we trained. Disgust also shows high accuracy compared to any other labels and it is because we resampled the disgust label data.
 
-![](RackMultipart20220526-1-zyxhcw_html_64fe26eb2de6c1d2.png) ![](RackMultipart20220526-1-zyxhcw_html_a9f7456a4506c62b.png)
+![Figure 19_A](figures/figure19_a.png)
 
-![](RackMultipart20220526-1-zyxhcw_html_e74efcb7e279e20c.png) ![](RackMultipart20220526-1-zyxhcw_html_a232b8d84b4f4036.png)
+![Figure 19_B](figures/figure19_b.png)
 
-Figure X: Confusion matrices of best result from each ML
+**Figure 19**: Confusion matrices of best result from each ML
 
 #### 6.1.3 Performance metrics with HoG
 
