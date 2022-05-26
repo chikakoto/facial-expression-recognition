@@ -25,7 +25,7 @@ Also, all the feature transfered data are at https://drive.google.com/file/d/1gU
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
-    │   ├── webcam         <- Webcam live facial expresssion detection script
+    │   └── webcam         <- Webcam live facial expresssion detection script
     │       └── fer.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
