@@ -82,7 +82,7 @@ HoG is a popular feature descriptor for object detection in an image by first co
 
 Bag of Visual Words is a widely used image feature representation in object recognition and is a vector-quantized histogram of many local features in an image. This method was originally derived from the Bag of Words model that is often used for Natural Language Processing. First, 128 dimensional local features were extracted from each image. In our experiment, we used SIFT, KAZE, ORB, BRISK, AKAZE shown in Figure 6 to extract feature descriptors. Then, cluster all feature vectors into K clusters by using K-means. Each centroid, center vector, of K clusters is a visual word and also represented by a 128 dimensional vector. Finally, the entire image was converted into a histogram with visual words as the dimension. This is done by searching for the closest visual word for each local feature in the image and voting for that visual word. Eventually this histogram will be the feature vector of the image. 
 
-[Figure 6](figures/figure6.png)
+![Figure 6](figures/figure6.png)
 
 **Figure 6**: Visualization of SIFT, KAZE, ORB, BRISK, and AKAZE feature detection algorithms
 
