@@ -23,14 +23,13 @@ In our research, we first performed Exploratory Data Analysis (EDA), cleaned the
 A number of papers on emotion recognition in images have been published in recent years, however, most of them are focusing on deep learning methods. 
 “Challenges in Representation Learning: A report on three machine learning contests” by Ian J. Goodfellow1, Dumitru Erhan [2] gave us a good starting point providing an overview of different ways of approaching the problem and helped us formulate the goal of the project. The key difference with our approach was that they often describe CNNs that were built through transfer learning when a model pre-trained on a large dataset was being used as the base later fine-tuned for a particular problem, as opposed to our CNN that was built from scratch.
 
-Even before Deep learning became a trend, many researchers have been trying to solve facial emotion recognition with conventional machine learning. The first thing that you may consider to try is to focus on the shapes of the parts that make up the face, such as the eyes, nose, and mouth, and the individual differences in their arrangement, and extract feature points from these and use them for recognition. However, it is quite difficult to accurately extract these parts from the facial image and even if each part can be extracted well, it is not so easy to use the difference in similar shapes for recognition. Therefore, instead of using such techniques, research is being actively conducted in the direction of treating the face image itself as a pattern and applying the statistical pattern recognition method. For example, as a classic technique, EigenFace was proposed by Turk and Pentland[3] in 1994 and later improved by using linear discriminant analysis (LDA) to produce FisherFace[4] in 1997 and even recently there have been study on this method, “Face Recognition Using Fisherface Method” by Anggo and Arapu[5]. There are many feature transformation techniques for recent years. “Empirical Evaluation of SVM for Facial Expression Recognition” by S. Saeed, J. Baber, M. Bakhtyar [6] delved into details of using Histogram of Oriented Gradients (HOG) and extending support vector machines for multi-class classification, using either one-vs-one or one-vs- all approach. Bag of Visual Words has been also popular in image pattern recognition[7].
+Even before Deep learning became a trend, many researchers have been trying to solve facial emotion recognition with conventional machine learning. The first thing that you may consider to try is to focus on the shapes of the parts that make up the face, such as the eyes, nose, and mouth, and the individual differences in their arrangement, and extract feature points from these and use them for recognition. However, it is quite difficult to accurately extract these parts from the facial image and even if each part can be extracted well, it is not so easy to use the difference in similar shapes for recognition. Therefore, instead of using such techniques, research is being actively conducted in the direction of treating the face image itself as a pattern and applying the statistical pattern recognition method. For example, as a classic technique, Eigenface was proposed by Turk and Pentland[3] in 1994 and later improved by using linear discriminant analysis (LDA) to produce FisherFace[4] in 1997 and even recently there have been study on this method, “Face Recognition Using Fisherface Method” by Anggo and Arapu[5]. There are many feature transformation techniques for recent years. “Empirical Evaluation of SVM for Facial Expression Recognition” by S. Saeed, J. Baber, M. Bakhtyar [6] delved into details of using Histogram of Oriented Gradients (HOG) and extending support vector machines for multi-class classification, using either one-vs-one or one-vs- all approach. Bag of Visual Words has been also popular in image pattern recognition[7].
 
 
 ## 4. Data:
 
 We selected Facial Expression Recognition 2013 (FER-2013) dataset [8] for the project which was created by Pierre Luc Carrier and Aaron Courville, and was widely publicized during a Kaggle competition [9]. In the paper called “Challenges in Representation Learning: A report on three machine learning contests” by Ian J. Goodfellow1, Dumitru Erhan we found background on how the dataset was created: “The dataset was created using the Google image search API to search for images of faces that match a set of 184 emotion-related keywords like “blissful”, “enraged,” etc. These keywords were combined with words related to gender, age or ethnicity, to obtain nearly 600 strings which were used as facial image search queries. The first 1000 images returned for each query were kept for the next stage of process- ing. OpenCV face recognition was used to obtain bounding boxes around each face in the collected images. Human labelers then rejected incorrectly labeled images, corrected the cropping if necessary, and filtered out some duplicate images. Approved, cropped images were then resized to 48x48 pixels and converted to grayscale.” [2]
 The original dataset contained 35,887 images, out of which 28,709 images belonged to the train set and the remaining 7,178 images were assigned to the test set. All images were then grouped into seven categories of emotions with 4,953 images labeled as “angry”, 547 “disgust” images, 5,127 “fear”, 8,989 “happy”, 6,077 “sad”, 4,002 “surprise”, and 6,198 “neutral”. During the EDA stage the dataset was inspected and images that contained black or white pixels only were removed. In addition, in order to address the issue with a severe imbalance between the classes, when images in the minority “disgust” class were only about 6% compared to the majority “happy” class, the “disgust” class was upsampled to 4,000 images (see Fig.1 for details about the data distribution between the classes before and after). The resampled dataset consists of 31,432 training images and 7,896 test images.
-
 
 ![Figure 1 A](figures/figure1_a.png) ![Figure 1 B](figures/figure1_b.png)
 
@@ -45,7 +44,7 @@ All images were preprocessed and transformed into numpy arrays, flattened and re
 
 Since the accuracy of all four models (SVM, KNN, Random Forest, and SGD) when trained on the original data with minimum preprocessing (only data cleaning and scaling) expectedly showed rather low performance, in this section we cover the gains in performance achieved by each classifier on the dataset  with the help of dimension reduction and feature transformation techniques.
 
-#### 5.1.1 EigenFace
+#### 5.1.1 Eigenface
 
 The simplest pattern recognition method is based on matching between patterns, but when the image itself is treated as a pattern, the dimensions of the pattern become enormous. Therefore, several methods have been proposed for matching after information compression of the pattern. One of the methods is the Eigenface, and the pattern is compressed by principal component analysis and used for face image identification. 
 
@@ -55,19 +54,19 @@ We first standardized the resampled dataset and then performed the principal com
 
 **Figure 2**: Explained variance ratio vs Principal components
 
-The first 34 principal components contain more than 80% of the cumulative explained variance ratio. As shown in Figure 4, the first few components take care of lightning conditions and later components extract identifying features, such as the eyes, nose and mouth. 
+The first 34 principal components contain more than 80% of the cumulative explained variance ratio. As shown in Figure 3, the first few components take care of lightning conditions and later components extract identifying features, such as the eyes, nose and mouth. 
 
 ![Figure 3](figures/figure3.png)
 
 **Figure 3**: Images of first 20 components of PCA
 
-#### 5.1.2 FisherFace
+#### 5.1.2 Fisherface
 
-Fisherface is one of the popular algorithms used in face recognition, and is widely believed to be superior to other techniques, such as Eigenface because of the effort to maximize the separation between classes in the training process. For this method, linear discriminant analysis (LDA) is applied after the PCA. LDA finds the axis that distinguishes between two or more classes. It does not get affected easily by differences in lighting and angles compared to EigenFace. We use the PCA data from 5.1 EigenFace, with a standardized resampled dataset and 115 components, and then apply LDA. Six examples from the FisherFace result are shown in Figure 4.
+Fisherface is one of the popular algorithms used in face recognition, and is widely believed to be superior to other techniques, such as Eigenface because of the effort to maximize the separation between classes in the training process. For this method, linear discriminant analysis (LDA) is applied after the PCA. LDA finds the axis that distinguishes between two or more classes. It does not get affected easily by differences in lighting and angles compared to Eigenface. We use the PCA data from 5.1 Eigenface, with a standardized resampled dataset and 115 components, and then apply LDA. Six examples from the Fisherface result are shown in Figure 4.
 
 ![Figure 4](figures/figure4.png)
 
-**Figure 4**: Images of fisherface
+**Figure 4**: Images of Fisherface
 
 ### 5.2 Feature transformation
 
@@ -95,7 +94,7 @@ We chose to use an SVM because it has the ability to capture complex relationshi
 
 #### 5.3.2 K-Nearest Neighbor Classifier (KNN)
 
-K-nearest neighbor classifier was selected because of its ability to produce complex nonlinear decision boundaries and the ease of implementation. KNN is another classification method based on the closest training example in the feature space and is often used in pattern recognition. It is intuitive and easy to use but also easily overfits. We used 2 numbers of neighbor, distance weight, and Minkowski metric for the evaluation. 
+K-nearest neighbor classifier was selected because of its ability to produce complex nonlinear decision boundaries and the ease of implementation. KNN is another classification method based on the closest training example in the feature space and is often used in pattern recognition. It is intuitive and easy to use but also easily overfits. We used 2 numbers of neighbor, distance weight, and Minkowski metric for the evaluation.
 
 #### 5.3.3 Stochastic Gradient Descent Classifier (SGD)
 
@@ -114,7 +113,7 @@ We evaluated a variety of model architectures, experimented with optimizers, los
 - 4 sets of convolutional and pooling layers followed by 50% dropout layer. Each convolutional layer had a 3x3  kernel size, RELU activation function, and a number of filters doubling in each consecutive layer, starting at 32 in the input layer and going up to 256 in the fourth convolutional layer.
 - Flatten layer followed by two sets of fully connected layers, each with its own dropout layer (30% and 25%).
 - Lastly, a fully connected layer with 7 units and a softmax activation function for the final prediction of the image class.
-- 
+
 ![Figure 7](figures/figure7.png)
 
 **Figure 7**: Convolutional Neural Network with 15 layers:  4 sets of convolutional and pooling layers; flatten layer followed by two sets of fully connected layers, each with its own dropout layer, and a fully connected layer for the final prediction of the image class.
@@ -168,7 +167,7 @@ As the image goes deeper into the layers of the model, the activations start loo
 
 #### 6.1.1 Testing accuracy comparison
 
-To compare the results achieved by four simple Machine Learning algorithms, we use EigenFace, FisherFace and HoG data as described in 5. Methods section. The following figure shows the test accuracy for each Machine Learning algorithm. Among SVM, EigenFace was the highest score, however, the training accuracy was 99% which means that the result is way overfitting. Therefore, HoG of 47% testing accuracy with 53% training accuracy makes the best result for SVM. HoG is also the highest for KNN with 51% accuracy. We use a small number of neighbors for this comparison, therefore training accuracy becomes 99%. Overall, the highest test accuracy is 51% for the Random Forest algorithm. Accuracy for most models is below 50%, which seems bad, however, it is acceptable compared to the 22% benchmark.
+To compare the results achieved by four simple Machine Learning algorithms, we use Eigenface, Fisherface and HoG data as described in 5. Methods section. The following figure shows the test accuracy for each Machine Learning algorithm. Among SVM, Eigenface was the highest score, however, the training accuracy was 99% which means that the result is way overfitting. Therefore, HoG of 47% testing accuracy with 53% training accuracy makes the best result for SVM. HoG is also the highest for KNN with 51% accuracy. We use a small number of neighbors for this comparison, therefore training accuracy becomes 99%. Overall, the highest test accuracy is 51% for the Random Forest algorithm. Accuracy for most models is below 50%, which seems bad, however, it is acceptable compared to the 22% benchmark.
 
 ![Figure 13](figures/figure13.png)
 
@@ -221,31 +220,32 @@ In the below section we looked at validation curves for each classifier in respe
 
 Validation curve for SVM increases as parameter C becomes larger, and the model starts overfitting. We determined that the best balance between accuracy and the ability of the model to generalize is achieved with the parameter C equal 10.
 
-![Figure 19](figures/figure19.png)
+<img src="figures/figure19.png" width="500">
 
 **Figure 19**: Validation curve for the SVM classifier
 
 As parameter K increases the performance of the model drops drastically. Using 10-fold cross validation we determined that the model shows best performance with k equal 3.
 
-![Figure 20](figures/figure20v3_50pct.png)
+<img src="figures/figure20.png" width="500">
+
 **Figure 20**: Accuracy of the KNN model as a function of number of neighbors K
 
-In a random forest, while keeping the number of trees constant and increasing the tree size our model starts to overfit. We found that by increasing the number of trees to 800 and increasing the max depth to 8 increases model performance and   accuracy.
+In a random forest, while keeping the number of trees constant and increasing the tree size our model starts to overfit. We found that by increasing the number of trees to 800 and increasing the max depth to 8 increases model performance and accuracy.
 
-![Figure 21](figures/figure21.png)
+<img src="figures/figure21.png" width="500">
 
 **Figure 21**: Validation curve for the Random Forest classifier with HOG
 
 As we increase alpha value (regularization), our model’s accuracy starts to decrease.  Model starts to move toward local minimum instead of global minimum.
 
-![Figure 22](figures/figure22.png)
+<img src="figures/figure22.png" width="500">
 
 **Figure 22**: Validation curve for SGD classifier with HOG
 
 
 #### 6.1.6 Learning curve
 
-Since SVM with PCA was overfitting, we chose SVM with HoG as the best result among SVM. Figure 23.a shows the learning curve for the SVM classifier on the data transformed with HoG, which clearly indicates that increasing the volume of training data leads to improvement of validation accuracy and consequently a reduction of the gap between training and validation accuracy. For the learning curve, KNN and Random forest show 100% training accuracy from the beginning of training. With KNN, any training dataset, EigenFace or FisherFace, showed almost 100% training accuracy.  By default the decision tree in random forest is not pruned thus the majority of the trees in the forest will recall the training case resulting in a perfect training score.
+Since SVM with PCA was overfitting, we chose SVM with HoG as the best result among SVM. Figure 23.a shows the learning curve for the SVM classifier on the data transformed with HoG, which clearly indicates that increasing the volume of training data leads to improvement of validation accuracy and consequently a reduction of the gap between training and validation accuracy. For the learning curve, KNN and Random forest show 100% training accuracy from the beginning of training. With KNN, any training dataset, Eigenface or Fisherface, showed almost 100% training accuracy.  By default the decision tree in random forest is not pruned thus the majority of the trees in the forest will recall the training case resulting in a perfect training score.
 
 ![Figure 23 A](figures/figure23_a.png)
 
@@ -286,23 +286,24 @@ Figure 26 summarizes validation accuracy achieved by the models tested. Setting 
 
 **Figure 26**: Validation accuracy by model
 
-Other methods tested with each model such as EigenFace, FisherFace, and Bag of Visual Words showed significantly lower performance as shown in the above sections. It is worth noting that the imbalanced nature of the FER2013 dataset makes the already challenging and arguably subjective task of emotion recognition even more difficult. On the other hand, the increase in performance of each model attributed to the experimentation with various data augmentation and transformation techniques highlights the importance of preprocessing of the data and fine-tuning of each model to achieve better results.
+Other methods tested with each model such as Eigenface, Fisherface, and Bag of Visual Words showed significantly lower performance as shown in the above sections. It is worth noting that the imbalanced nature of the FER2013 dataset makes the already challenging and arguably subjective task of emotion recognition even more difficult. On the other hand, the increase in performance of each model attributed to the experimentation with various data augmentation and transformation techniques highlights the importance of preprocessing of the data and fine-tuning of each model to achieve better results.
+
 
 ## 8. Attribution:
 
 Total Team meeting: 12 Hours 
 
+**Chikako Olsen**: contributed writing codes for data preparation, dimension reduction, feature transformation, SVM, KNN and webcam live demonstration.
 
-Insert Github bar graph &amp; visualization of when commit occured
+**Rabiul Hossain**: EDA, SGD, RandomForest, Image processing(Transformation, Augmentation, Transformation) 
 
-**Chikako** contributed writing codes for data preparation, dimension reduction, feature transformation, SVM, KNN and webcam live demonstration. Total hours of coding work is X hours and total meeting hours is X hours.
-
-**Rabiul Hossain** : EDA, SGD, RandomForest, Image processing(Transformation, Augmentation, Transformation) 
-
-**Ivan Miller**
-EDA, KNN and cross-validation, CNN - model design and parameter tuning, activation maps
+**Ivan Miller**: EDA, KNN and cross-validation, CNN - model design and parameter tuning, activation maps
 
 Project repository: https://github.com/chikakoto/facial-expression-recognition
+
+![Figure 27](figures/figure27.png)
+
+![Figure 28](figures/figure28.png)
 
 
 ## Bibliography:
@@ -345,20 +346,23 @@ Vol. 9, No. 11, 2018
 5. X
 6.
 
+
 ## Appendix:
 
 ### Comparison with different type of data in different scale for SVM and KNN
 
 The following figures show the test accuracy on SVM and KNN with different types of data in different scales or different parameters. The first figure shows the accuracy of the original dataset, scaled original dataset, which pixels are divided by 255, HoG on original dataset, Rescaled HoG on original dataset. 
 
-![](RackMultipart20220526-1-zyxhcw_html_1443eae92f541c5b.png)
+![Figure 29](figures/figure29.png)
 
-The next figures are for EigenFace and FisherFace. For EigenFace, PCA on the original dataset, PCA on normalized data, PCA on standardized data, PCA on scaled data, and last one is the inverted image data from PCA on the original dataset which did the worst on SVM. FisherFace is almost the same as the PCA, and those are PCA + LDA on the original dataset, on normalized data, on standardized data or on scaled data. 
+The next figures are for Eigenface and Fisherface. For Eigenface, PCA on the original dataset, PCA on normalized data, PCA on standardized data, PCA on scaled data, and last one is the inverted image data from PCA on the original dataset which did the worst on SVM. Fisherface is almost the same as the PCA, and those are PCA + LDA on the original dataset, on normalized data, on standardized data or on scaled data. 
 
-![](RackMultipart20220526-1-zyxhcw_html_6792d7f811339c0a.png) ![](RackMultipart20220526-1-zyxhcw_html_246a621df6b12359.png)
+![Figure 30](figures/figure30.png) ![Figure 31](figures/figure31.png)
 
 The following figures are each descriptor in a different number of visual words, K. Original means that Bag of feature on the original dataset and PCA means that Bag of feature on PCA dataset. All of the results are below the benchmark. 
 
-![](RackMultipart20220526-1-zyxhcw_html_3e45781b5dc67ec.png) ![](RackMultipart20220526-1-zyxhcw_html_dbcacb3a16571c17.png)
+![Figure 32](figures/figure32.png) ![Figure 32](figures/figure32.png)
 
-![](RackMultipart20220526-1-zyxhcw_html_c1bd4af69f23ad81.png) ![](RackMultipart20220526-1-zyxhcw_html_1ab96c29851db639.png) ![](RackMultipart20220526-1-zyxhcw_html_ca9e641197533312.png)
+![Figure 33](figures/figure33.png) ![Figure 34](figures/figure34.png)
+
+![Figure 34](figures/figure34.png)
