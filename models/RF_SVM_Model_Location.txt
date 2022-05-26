@@ -1,0 +1,8 @@
+Random Forest and SVM Model's are very large, hence it has been uploaded to Google drive and public link can be found below
+
+#SVM https://drive.google.com/file/d/1ljHGaSHeouRY7iUP743egGLz1wwIDntj/view?usp=sharing
+#RF https://drive.google.com/file/d/1-8bPaLG0v_xyHFP8sO34V4uvshrfpJGb/view?usp=sharing
+
+Please use below line of code to download them to any colab notebook. 
+!gdown --id 1ljHGaSHeouRY7iUP743egGLz1wwIDntj -O svm.sav
+!gdown --id 1-8bPaLG0v_xyHFP8sO34V4uvshrfpJGb -O rf.sav
