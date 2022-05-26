@@ -129,7 +129,7 @@ One of the steps that helped us reduce overfitting and significantly increase tr
 
 #### Activation Maps
 
-To look at what happens under the hood of the neural network we looked at activation of the network during the forward pass. Simply put activation functions help determine whether a given neuron within a layer gets activated or not based on the input data it receives. To visualize the transformations of an image as it goes through filters of each layer we dissected the model by layers to see how the image is changing as it goes through filters of each layer making the output of one layer an input for the next. Figures 8 through xx illustrate how the image is being transformed by the first four layers of the neural network.
+To look at what happens under the hood of the neural network we looked at activation of the network during the forward pass. Simply put activation functions help determine whether a given neuron within a layer gets activated or not based on the input data it receives. To visualize the transformations of an image as it goes through filters of each layer we dissected the model by layers to see how the image is changing as it goes through filters of each layer making the output of one layer an input for the next. Figures 8 through 11 illustrate how the image is being transformed by the first four layers of the neural network.
 
 ![Figure 8](figures/figure8.png)
 
