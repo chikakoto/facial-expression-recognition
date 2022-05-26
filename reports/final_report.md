@@ -295,7 +295,12 @@ Total Team meeting: 12 Hours
 
 Insert Github bar graph &amp; visualization of when commit occured
 
-Chikako contributed writing codes for data preparation, dimension reduction, feature transformation, SVM, KNN and webcam live demonstration. Total hours of coding work is X hours and total meeting hours is X hours.
+**Chikako** contributed writing codes for data preparation, dimension reduction, feature transformation, SVM, KNN and webcam live demonstration. Total hours of coding work is X hours and total meeting hours is X hours.
+
+**Rabiul Hossain** : EDA, SGD, RandomForest, Image processing(Transformation, Augmentation, Transformation) 
+
+**Ivan Miller**
+EDA, KNN and cross-validation, CNN - model design and parameter tuning, activation maps
 
 Project repository: https://github.com/chikakoto/facial-expression-recognition
 
