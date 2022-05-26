@@ -308,43 +308,35 @@ Project repository: https://github.com/chikakoto/facial-expression-recognition
 
 ## Bibliography:
 
-1. MANAS SAMBARE: FER-2013
+1. A. Chen, “Computers can’t tell if you’re happy when you smile”, MIT Technology Review, 07.26.2019<br>
+https://www.technologyreview.com/2019/07/26/238782/emotion-recognition-technology-artifical-intelligence-inaccurate-psychology/
 
-[https://www.kaggle.com/datasets/msambare/fer2013](https://www.kaggle.com/datasets/msambare/fer2013)
+2. I. Goodfellow1, D. Erhan: “Challenges in Representation Learning: A report on three machine learning contests”, arXiv:1307.0414. <br>
+https://arxiv.org/abs/1307.0414
 
-1. Research Prediction Competition: Challenges in Representation Learning: Facial Expression Recognition Challenge
+3. Matthew A. Turk and Alex P. Pentland, “Face recognition using eigenfaces” Proc. IEEE Conference on Computer Vision and Pattern Recognition, pp. 586–591 (1991)<br>
+https://sites.cs.ucsb.edu/~mturk/Papers/mturk-CVPR91.pdf 
 
-[https://www.kaggle.com/competitions/challenges-in-representation-learning-facial-expression-recognition-challenge/data](https://www.kaggle.com/competitions/challenges-in-representation-learning-facial-expression-recognition-challenge/data)
+4. Peter N. Belhumeur, João P. Hespanha, and David J. Kriegman: ”Eigenfaces vs. Fisherfaces: Recognition Using Class Specific Linear Projection” IEEE Transaction on Pattern Analysis and Machine Intelligence, Vol. 19, No. 7, July 1997<br>
+https://cseweb.ucsd.edu/classes/wi14/cse152-a/fisherface-pami97.pdf 
 
-1. Goodfellow1, D. Erhan: &quot;Challenges in Representation Learning: A report on three machine learning contests&quot;, arXiv:1307.0414.
+5. Mustamin Anggo and La Arapu, “Face Recognition Using Fisherface Method”, IOP Conf. Series: Journal of Physics: Conf. Series 1028 (2018) 012119<br> https://iopscience.iop.org/article/10.1088/1742-6596/1028/1/012119/pdf
 
-[https://arxiv.org/abs/1307.0414](https://arxiv.org/abs/1307.0414)
+6. S. Saeed, J. Baber, M. Bakhtyar: “Empirical Evaluation of SVM for Facial Expression Recognition”. International Journal of Advanced Computer Science and Applications, Vol. 9, No. 11, 2018<br>
+https://pdfs.semanticscholar.org/b476/20c2d7698adf3f369d98b97fc9bba0ef3133.pdf
 
-1. Saeed, J. Baber, M. Bakhtyar: &quot;Empirical Evaluation of SVM for Facial Expression Recognition&quot;. International Journal of Advanced Computer Science and Applications,
+7. G. Csurka, C. Dance, L.X. Fan, J. Willamowski and C. Bray “Visual Categorization with Bags of Keypoints” International Workshop on Statistical Learning in Computer Vision, ECCV, pp. 1–22, 2004.<br>
+https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/csurka-eccv-04.pdf 
+8. MANAS SAMBARE: FER-2013<br>
+https://www.kaggle.com/datasets/msambare/fer2013 
 
-Vol. 9, No. 11, 2018
+9. Research Prediction Competition: Challenges in Representation Learning: Facial Expression Recognition Challenge<br>
+https://www.kaggle.com/competitions/challenges-in-representation-learning-facial-expression-recognition-challenge/data 
 
-[https://pdfs.semanticscholar.org/b476/20c2d7698adf3f369d98b97fc9bba0ef3133.pdf](https://pdfs.semanticscholar.org/b476/20c2d7698adf3f369d98b97fc9bba0ef3133.pdf)
+10. Sandipan Dey “Python Image Processing Cookbook” Chapter 8 (2020) N. Dalal, B. Triggs, “Histograms of Oriented Gradients for Human Detection”, 2005<br>  https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf
 
-1. Mustamin Anggo and La Arapu, &quot;Face Recognition Using Fisherface Method&quot;, IOP Conf. Series: Journal of Physics: Conf. Series 1028 (2018) 012119 [https://iopscience.iop.org/article/10.1088/1742-6596/1028/1/012119/pdf](https://iopscience.iop.org/article/10.1088/1742-6596/1028/1/012119/pdf)
-2. Matthew A. Turk and Alex P. Pentland, &quot;Face recognition using eigenfaces&quot; Proc. IEEE Conference on Computer Vision and Pattern Recognition, pp. 586–591 (1991)
+11. Dahinden, C., 2009. An improved Random Forests approach with application to the performance prediction challenge datasets. Hands on Pattern Recognition. Microtome. Breiman, L., 2001. Random forests. Machine learning, 45(1), pp.5–32
 
-[https://sites.cs.ucsb.edu/~mturk/Papers/mturk-CVPR91.pdf](https://sites.cs.ucsb.edu/~mturk/Papers/mturk-CVPR91.pdf)
-
-1. Peter N. Belhumeur, João P. Hespanha, and David J. Kriegman: &quot;Eigenfaces vs. Fisherfaces: Recognition Using Class Specific Linear Projection&quot; IEEE Transaction on Pattern Analysis and Machine Intelligence, Vol. 19, No. 7, July 1997
-
-[https://cseweb.ucsd.edu/classes/wi14/cse152-a/fisherface-pami97.pdf](https://cseweb.ucsd.edu/classes/wi14/cse152-a/fisherface-pami97.pdf)
-
-1. Csurka, C. Dance, L.X. Fan, J. Willamowski and C. Bray &quot;Visual Categorization with Bags of Keypoints&quot; International Workshop on Statistical Learning in Computer Vision, ECCV, pp. 1–22, 2004.
-
-[https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/csurka-eccv-04.pdf](https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/csurka-eccv-04.pdf)
-
-1. Sandipan Dey &quot;Python Image Processing Cookbook&quot; Chapter 8 (2020)
-2. Dalal, B. Triggs, &quot;Histograms of Oriented Gradients for Human Detection&quot;, 2005, [https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf](https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf)
-3. Dahinden, C., 2009. An improved Random Forests approach with application to the performance prediction challenge datasets. Hands on Pattern Recognition. Microtome.
-4. Breiman, L., 2001. Random forests. Machine learning, 45(1), pp.5–32
-5. X
-6.
 
 
 ## Appendix:
