@@ -227,7 +227,7 @@ Validation curve for SVM increases as parameter C becomes larger, and the model 
 
 As parameter K increases the performance of the model drops drastically. Using 10-fold cross validation we determined that the model shows best performance with k equal 3.
 
-![Figure 20](figures/figure20.png)
+![Figure 20](figures/figure20v3_50pct.png)
 **Figure 20**: Accuracy of the KNN model as a function of number of neighbors K
 
 In a random forest, while keeping the number of trees constant and increasing the tree size our model starts to overfit. We found that by increasing the number of trees to 800 and increasing the max depth to 8 increases model performance and   accuracy.
